@@ -36,4 +36,56 @@ public class LibraryController
             return new List<Book>();
         }
     }
+
+    public Book GetBookById(int id)
+    {
+        return _databaseHelper.FindBookById(id);
+    }
+
+    public void UpdateBook(Book book)
+    {
+        _databaseHelper.UpdateBook(book);
+    }
+
+    public void DeleteBook(int id)
+    {
+        var book = _databaseHelper.FindBookById(id);
+
+        if (book == null)
+        {
+            System.Console.WriteLine("No book found with the given ID.");
+            return;
+        }
+
+        try
+        {
+            _databaseHelper.DeleteBook(id);
+            System.Console.WriteLine($"Book '{book.Title}' deleted.");
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error while deleting book: {ex.Message}");
+        }
+    }
+
+    public void SearchBooks(string searchCriteria, string searchTerm)
+    {
+        var foundBooks = _databaseHelper.SearchBooksByCriteria(searchCriteria, searchTerm);
+
+        if (foundBooks.Count == 0)
+        {
+            System.Console.WriteLine("No books match your criteria.");
+        }
+        else
+        {
+            System.Console.WriteLine("Search results:\n");
+            foreach (var book in foundBooks)
+            {
+                System.Console.WriteLine(book.ToString());
+                
+            }
+        }
+        System.Console.WriteLine("\nPress any key to return to previous menu: ");
+        Console.ReadKey();
+    }
 }

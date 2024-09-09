@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9su8QlJJZn4NJFIRP6HOeVGJvPyketmIaYmjF9klNHRoySNj8Y187k7bCmL932kUWl5ztBHWd7snuA1+Om2fpA==",
+  "dgSpecHash": "smylT0OnA5QQyC1q5UpUmCj5etQEpnguM5nnIHgd5V2zLlKfGSoG8u29ZaC1pi1jXF8PJbKJZFopi+j102Rv2Q==",
   "success": true,
-  "projectFilePath": "/home/jakiced/Programming/csharp-console-book-library/BookLibrary/BookLibrary.csproj",
+  "projectFilePath": "/home/jakiced/Programming/Projects/csharp-console-book-library/BookLibrary/BookLibrary.csproj",
   "expectedPackageFiles": [
     "/home/jakiced/.nuget/packages/microsoft.data.sqlite/8.0.8/microsoft.data.sqlite.8.0.8.nupkg.sha512",
     "/home/jakiced/.nuget/packages/microsoft.data.sqlite.core/8.0.8/microsoft.data.sqlite.core.8.0.8.nupkg.sha512",

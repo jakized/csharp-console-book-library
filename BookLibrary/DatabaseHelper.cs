@@ -70,7 +70,7 @@ public class DatabaseHelper : IDisposable
             throw new ArgumentException("Title and Author cannot be empty.");
         }
 
-        try 
+        try
         {
             OpenConnection();
 
@@ -141,7 +141,154 @@ public class DatabaseHelper : IDisposable
         {
             CloseConnection();
         }
-        
+
+        return books;
+    }
+
+    public Book FindBookById(int id)
+    {
+        Book book = null;
+
+        try
+        {
+            OpenConnection();
+            string findIdQuery = "SELECT * FROM Books WHERE Id=@Id";
+
+            using (var command = new SqliteCommand(findIdQuery, _connection))
+            {
+                command.Parameters.AddWithValue("@Id", id);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        book = new Book(
+                            reader.GetInt32(reader.GetOrdinal("Id")),
+                            reader.GetString(reader.GetOrdinal("Title")),
+                            reader.GetString(reader.GetOrdinal("Author")),
+                            reader.GetString(reader.GetOrdinal("Genre")),
+                            reader.GetInt32(reader.GetOrdinal("PublicationYear"))
+                        );
+                    }
+                }
+            }
+        }
+        catch (SqliteException ex)
+        {
+            System.Console.WriteLine($"Database error: {ex.Message}");
+        }
+        finally
+        {
+            CloseConnection();
+        }
+
+        return book;
+    }
+
+    public void UpdateBook(Book book)
+    {
+        try
+        {
+            OpenConnection();
+            string updateQuery = @"UPDATE Books SET Title = @Title, 
+                Author = @Author, Genre = @Genre, PublicationYear = @PublicationYear WHERE Id = @Id;";
+
+            using (var command = new SqliteCommand(updateQuery, _connection))
+            {
+                command.Parameters.AddWithValue("@Id", book.Id);
+                command.Parameters.AddWithValue("@Title", book.Title);
+                command.Parameters.AddWithValue("@Author", book.Author);
+                command.Parameters.AddWithValue("@Genre", book.Genre ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@PublicationYear", book.PublicationYear);
+
+                int rows = command.ExecuteNonQuery();
+                if (rows == 0)
+                {
+                    throw new Exception("Update failed. Book not found.");
+                }
+            }
+        }
+        catch (SqliteException ex)
+        {
+            System.Console.WriteLine($"Database error: {ex.Message}");
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
+
+    public void DeleteBook(int Id)
+    {
+        try
+        {
+            OpenConnection();
+            string deleteQuery = "DELETE FROM Books WHERE Id = @Id;";
+
+            using (var command = new SqliteCommand(deleteQuery, _connection))
+            {
+                command.Parameters.AddWithValue("@Id", Id);
+
+                int rows = command.ExecuteNonQuery();
+
+                if (rows == 0)
+                {
+                    System.Console.WriteLine("No book with given ID.");
+                }
+            }
+        }
+        catch (SqliteException ex)
+        {
+            System.Console.WriteLine($"Database error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error while deleting book: {ex.Message}");
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
+
+    public List<Book> SearchBooksByCriteria(string criteria, string searchTerm)
+    {
+        var books = new List<Book>();
+
+        try
+        {
+            OpenConnection();
+            string searchQuery = $"SELECT * FROM Books WHERE {criteria} LIKE @searchTerm";
+
+            using (var command = new SqliteCommand(searchQuery, _connection))
+            {
+                command.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var book = new Book(
+                            reader.GetInt32(reader.GetOrdinal("Id")),
+                            reader.GetString(reader.GetOrdinal("Title")),
+                            reader.GetString(reader.GetOrdinal("Author")),
+                            reader.IsDBNull(reader.GetOrdinal("Genre")) ? null : reader.GetString(reader.GetOrdinal("Genre")),
+                            reader.GetInt32(reader.GetOrdinal("PublicationYear"))
+                        );
+                        books.Add(book);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error during search: {ex.Message}");
+        }
+        finally
+        {
+            CloseConnection();
+        }
+
         return books;
     }
 }

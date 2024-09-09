@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jakiced/Programming/csharp-console-book-library/BookLibrary/BookLibrary.csproj": {}
+    "/home/jakiced/Programming/Projects/csharp-console-book-library/BookLibrary/BookLibrary.csproj": {}
   },
   "projects": {
-    "/home/jakiced/Programming/csharp-console-book-library/BookLibrary/BookLibrary.csproj": {
+    "/home/jakiced/Programming/Projects/csharp-console-book-library/BookLibrary/BookLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jakiced/Programming/csharp-console-book-library/BookLibrary/BookLibrary.csproj",
+        "projectUniqueName": "/home/jakiced/Programming/Projects/csharp-console-book-library/BookLibrary/BookLibrary.csproj",
         "projectName": "BookLibrary",
-        "projectPath": "/home/jakiced/Programming/csharp-console-book-library/BookLibrary/BookLibrary.csproj",
+        "projectPath": "/home/jakiced/Programming/Projects/csharp-console-book-library/BookLibrary/BookLibrary.csproj",
         "packagesPath": "/home/jakiced/.nuget/packages/",
-        "outputPath": "/home/jakiced/Programming/csharp-console-book-library/BookLibrary/obj/",
+        "outputPath": "/home/jakiced/Programming/Projects/csharp-console-book-library/BookLibrary/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jakiced/.nuget/NuGet/NuGet.Config"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.108/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
