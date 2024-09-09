@@ -7,12 +7,12 @@ SQLite Database Integration: Persistent local database for storing book details.
 Searching: Option to search for books by title, author, genre, and publication year.
 
 🛠️ Project Structure
--- ├── BookLibraryManager
--- │   ├── Book.cs               # book entity.
--- │   ├── LibraryController.cs   # Business logic and operations on books.
--- │   ├── DatabaseHelper.cs      # SQLite database connection and queries.
--- │   ├── UserInterface.cs       # Interaction with the user and displays UI.
--- │   └── Program.cs             # Application entry point, showing the main menu.
+- ├── BookLibraryManager
+- │   ├── Book.cs               # book entity.
+- │   ├── LibraryController.cs   # Business logic and operations on books.
+- │   ├── DatabaseHelper.cs      # SQLite database connection and queries.
+- │   ├── UserInterface.cs       # Interaction with the user and displays UI.
+- │   └── Program.cs             # Application entry point, showing the main menu.
 
 
 Classes and Responsibilities
@@ -46,8 +46,8 @@ Provides feedback, displays books, and interacts with the controller.
 Clone the repository.
 
 Build and run the application:
--- dotnet build
--- dotnet run
+- dotnet build
+- dotnet run
 
 
 Navigate the menu to manage your book library:
@@ -60,5 +60,5 @@ Navigate the menu to manage your book library:
 
 
 📦 Dependencies
--- .NET Core SDK
--- SQLite (Integrated via Microsoft.Data.Sqlite)
+- .NET Core SDK
+- SQLite (Integrated via Microsoft.Data.Sqlite)
